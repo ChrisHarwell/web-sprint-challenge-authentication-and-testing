@@ -3,7 +3,7 @@ const supertest = require("supertest")
 const server = require("./server")
 const db = require("../database/dbConfig.js")
 
-let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoyLCJ1c2VybmFtZSI6IkNocmlzMTIiLCJpYXQiOjE2MDA0NDM1NDYsImV4cCI6MTYwMDQ0NzE0Nn0.TQmAHflVVh53GgNf4jNgE6HmTs9UytFRGTYG_AcKSFU";
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6IkNocmlzMTIiLCJpYXQiOjE2MDA0NDUyODEsImV4cCI6MTYwMDQ0ODg4MX0.DyCDVZ0y5uo5RdV_2rdT8klEI4IRMHKa55KbjxIz4Fw";
 
 beforeAll((done) => {
     supertest(server)
@@ -65,6 +65,7 @@ it("POST api/auth/login - should return status 401", function () {
 it("GET api/jokes/ - res.type should match json", function () {
     return supertest(server)
         .get("/api/jokes/")
+        .set("Authorization", `Bearer ${token}`)
         .then(res => {
 
             expect(res.type).toMatch(/json/i);
